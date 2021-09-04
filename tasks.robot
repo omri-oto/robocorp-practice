@@ -26,11 +26,12 @@ Collect url from user
 Open the robot order website
     ${secret}=  Get Secret  credentials
     Open Available Browser    ${secret}[shop]
-    
+
 
 *** Keywords ***
 Get orders
-    Download    https://robotsparebinindustries.com/orders.csv  ${CURDIR}${/}output${/}orders.csv   overwrite=True
+    [Arguments]   ${file_url}
+    Download   ${file_url}   ${CURDIR}${/}output${/}orders.csv   overwrite=True
     ${order_table}=  Read table from CSV    ${CURDIR}${/}output${/}orders.csv
     [Return]    ${order_table}
 
@@ -103,9 +104,9 @@ Create a ZIP file of the receipts
 
 *** Tasks ***
 Order robots from RobotSpareBin Industries Inc
-    Collect url from user
+    ${file_csv}=    Collect url from user
     Open the robot order website
-    ${orders}=    Get orders
+    ${orders}=    Get orders    ${file_csv}
     FOR    ${row}    IN    @{orders}
         Close the annoying modal
         Fill the form    ${row}
