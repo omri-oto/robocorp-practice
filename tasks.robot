@@ -100,7 +100,7 @@ Go to order another robot
 
 *** Keywords ***
 Create a ZIP file of the receipts
-    Archive Folder With Zip     ${CURDIR}${/}output${/}receipts     receipts.zip
+    Archive Folder With Zip     ${CURDIR}${/}output${/}receipts     ${CURDIR}${/}output${/}receipts.zip
 
 *** Tasks ***
 Order robots from RobotSpareBin Industries Inc
